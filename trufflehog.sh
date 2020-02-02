@@ -20,7 +20,7 @@ function iterate_over_repos() {
         'https://github.com/Zilliqa/scilla'
         'https://github.com/Zilliqa/Zilliqa'
         'https://github.com/Zilliqa/Zilliqa-JavaScript-Library'
-        'https://github.com/cryptolandtech/moonlet-core/releases/tag/v0.0.1'
+        'https://github.com/cryptolandtech/moonlet-core'
         'https://github.com/Zilliqa/nucleus-wallet'
         'https://github.com/square/git-fastclone'
         'https://github.com/square/go-jose'
