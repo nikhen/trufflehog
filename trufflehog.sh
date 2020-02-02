@@ -1,6 +1,7 @@
 #!/bin/bash
 
 function scan_repo() {
+    date
     echo "Scanning repository:" $1
     time trufflehog --regex --entropy=False $1
     echo ""
