@@ -4,7 +4,6 @@
 #     - trufflehog content into temporary file
 #         pipe into wc -c
 #         report on findings or not in repo -> detailed scan later
-#     - read repo list from file
 #     - timestamp feature - scan since ...
 #     - error handling: lost connection
 #         error: RPC failed; curl 18 transfer closed with outstanding read data remainin
@@ -24,7 +23,10 @@ function print_separator() {
 
 function iterate_over_repos() {
     local i=0
-    local a_url=(
+    local a_url
+    readarray -t a_url < repo_target_list.txt
+
+    local a_url2=(
 #        'https://github.com/Zilliqa/savant-ide'
         'https://github.com/algorand/go-algorand'
         'https://github.com/algorand/pyteal'
