@@ -11,7 +11,7 @@
 function scan_repo() {
     date
     echo "Scanning repository:" $1
-    time trufflehog --regex --entropy=False $1 --rules regex_rules.json
+    time trufflehog --regex --entropy=False $1 --rules regex_rules.json -x exclude-patterns.txt
     echo ""
     echo "Done. Scanned repository" $1
     echo ""
