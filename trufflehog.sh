@@ -7,7 +7,7 @@
 #     - timestamp feature - scan since ...
 #     - error handling: lost connection
 #         error: RPC failed; curl 18 transfer closed with outstanding read data remainin
-#     - custom regex patterns - do not detect pgp keys, do not detect "test"-commits
+
 function scan_repo() {
     date
     echo "Scanning repository:" $1
@@ -24,49 +24,9 @@ function print_separator() {
 function iterate_over_repos() {
     local i=0
     local a_url
-    readarray -t a_url < repo_target_list.txt
 
-    local a_url2=(
-#        'https://github.com/Zilliqa/savant-ide'
-        'https://github.com/algorand/go-algorand'
-        'https://github.com/algorand/pyteal'
-        'https://github.com/algorand/py-algorand-sdk'
-        'https://github.com/algorand/algorand-sdk-testing'
-        'https://github.com/algorand/java-algorand-sdk'
-        'https://github.com/algorand/js-algorand-sdk'
-        'https://github.com/algorand/go-algorand-sdk'
-        'https://github.com/algorand/py-exebot'
-        'https://github.com/algorand/pixel'
-#        'https://github.com/Zilliqa/scilla'
-#        'https://github.com/Zilliqa/Zilliqa'
-#        'https://github.com/Zilliqa/Zilliqa-JavaScript-Library'
-#        'https://github.com/cryptolandtech/moonlet-core'
-#        'https://github.com/Zilliqa/nucleus-wallet'
-#        'https://github.com/square/git-fastclone'
-#        'https://github.com/square/go-jose'
-#        'https://github.com/square/js-jose'
-#        'https://github.com/square/keywhiz'
-#        'https://github.com/square/keywhiz-fs'
-#        'https://github.com/square/keysync'
-#        'https://github.com/square/okhttp'
-#        'https://github.com/square/okio'
-# private       'https://github.com/square/pam_krb_cache'
-#        'https://github.com/square/ghostunnel'
-#        'https://github.com/square/rails-auth'
-#        'https://github.com/square/retrofit'
-#        'https://github.com/square/squalor'
-#        'https://github.com/square/sudo_pair'
-#        'https://github.com/square/valet'
-#        'https://github.com/square/wire'
-#       'https://github.com/freedomofpress/securedrop'
-#        'https://github.com/freedomofpress/securedrop-workstation'
-        'https://github.com/freedomofpress/securedrop-client'
-        'https://github.com/freedomofpress/securedrop-sdk'
-        'https://github.com/freedomofpress/securedrop-proxy'
-        'https://github.com/freedomofpress/securedrop-export'
-        'https://github.com/freedomofpress/securedrop-log'
-        'https://github.com/freedomofpress/securedrop-debian-packaging'
-    )
+    readarray -t a_url < _repo_target_list.txt
+
     local number_of_repos=${#a_url[@]}
 
     echo "Scanning "$number_of_repos "repositories."
