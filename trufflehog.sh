@@ -21,6 +21,15 @@ function print_separator() {
     echo "----"
 }
 
+function read_repositories_into_variable() {
+    mkdir _tmp
+    wget https://api.github.com/users/Comcast/repos -O _tmp/_repo_list.json
+    repo_list_json=$(<_tmp/_repo_list.json)
+    echo $repo_list_json | jq . | grep clone_url | sed s/.*\"clone_url\":.*\"https/https/g | sed s/\",//g > _tmp/_repo_url_list.txt
+    cp _tmp/_repo_url_list.txt _repo_target_list.txt
+    rm -rf _tmp
+}
+
 function iterate_over_repos() {
     local i=0
     local a_url
@@ -42,6 +51,8 @@ function iterate_over_repos() {
 }
 
 function main() {
+
+    read_repositories_into_variable
 
     iterate_over_repos
 
