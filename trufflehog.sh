@@ -5,8 +5,6 @@
 #         pipe into wc -c
 #         report on findings or not in repo -> detailed scan later
 #     - timestamp feature - scan since ...
-#     - error handling: lost connection
-#         error: RPC failed; curl 18 transfer closed with outstanding read data remainin
 
 function scan_repo() {
     date
@@ -23,7 +21,7 @@ function print_separator() {
 
 function read_repositories_into_variable() {
     mkdir _tmp
-    wget https://api.github.com/users/Comcast/repos -O _tmp/_repo_list.json
+    wget https://api.github.com/users/$organization/repos -O _tmp/_repo_list.json
     repo_list_json=$(<_tmp/_repo_list.json)
     echo $repo_list_json | jq . | grep clone_url | sed s/.*\"clone_url\":.*\"https/https/g | sed s/\",//g > _tmp/_repo_url_list.txt
     cp _tmp/_repo_url_list.txt _repo_target_list.txt
@@ -52,10 +50,19 @@ function iterate_over_repos() {
 
 function main() {
 
-    read_repositories_into_variable
+    if [ -n "$organization" ]; then
+        read_repositories_into_variable
+    fi
 
     iterate_over_repos
 
 }
+
+while getopts "o:" opt; do
+    case $opt in
+        o)  organization="$OPTARG"
+            ;;
+    esac
+done
 
 main
