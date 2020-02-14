@@ -14,7 +14,7 @@ You might optionally specify the name of a github organization
 
     bash trufflehog.sh -o ORGNAME
 
-The script will then fetch all repositories from this organization.
+In this mode, input file *_repo_target_list* is not required. The script will try to fetch all repositories from the given github organization. This mode only operates on repositories hosted on *github.com*.
 
 While the original trufflehog runs on a single repository, this wrapper is constructed to allow consecutive scanning of multiple repositories or organizations.
 
