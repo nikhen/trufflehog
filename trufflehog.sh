@@ -1,18 +1,30 @@
 #!/bin/bash
 
-# to do
-#     - trufflehog content into temporary file
-#         pipe into wc -c
-#         report on findings or not in repo -> detailed scan later
-#     - timestamp feature - scan since ...
+#
+#  global variables
+#
+#    MAX_RETRIES: maximum number of retries after failed requests
+#
+MAX_RETRIES=5
 
 function scan_repo() {
+    local j=0
+
     date
     echo "Scanning repository:" $1
-    time trufflehog --regex --entropy=False $1 --rules regex_rules.json -x exclude-patterns.txt
-    echo ""
-    echo "Done. Scanned repository" $1
-    echo ""
+
+    while [ $j -le $MAX_RETRIES ]
+    do
+        trufflehog --json --regex --entropy=False $1 --rules regex_rules.json -x exclude-patterns.txt
+        if [ "$?" = "0" ]; then
+            echo ""
+            echo "Done. Scanned repository" $1
+            echo ""
+            break
+        fi
+        sleep 10
+        j=$(( $j + 1 ))
+    done
 }
 
 function print_separator() {
@@ -43,7 +55,7 @@ function iterate_over_repos() {
     do
          scan_repo $u
          ((i++))
-         echo "Scanned" $i"/"$number_of_repos "repositories."
+         echo "Triggered scan for" $i"/"$number_of_repos "repositories."
          print_separator
     done
 }
