@@ -20,6 +20,7 @@
     "Google Gmail OAuth": "[0-9]+-[0-9A-Za-z_]{32}\\.apps\\.googleusercontent\\.com",
     "Google OAuth Access Token": "ya29\\.[0-9A-Za-z\\-_]+",
     "Heroku API Key": "[h|H][e|E][r|R][o|O][k|K][u|U].*[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}",
+    "Authorization Header Token": "earer\s[\d|a-f]{8}-([\d|a-f]{4}-){3}[\d|a-f]{12}",
     "PayPal Braintree Access Token": "access_token\\$production\\$[0-9a-z]{16}\\$[0-9a-f]{32}",
     "Picatic API Key": "sk_live_[0-9a-z]{32}",
     "Stripe API Key": "sk_live_[0-9a-zA-Z]{24}",
