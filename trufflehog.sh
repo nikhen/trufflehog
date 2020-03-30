@@ -15,7 +15,7 @@ function scan_repo() {
 
     while [ $j -le $MAX_RETRIES ]
     do
-        trufflehog --json --regex --entropy=False $1 --rules regex_rules.json -x exclude-patterns.txt
+        trufflehog --json --regex --entropy=False $1 --rules regex_rules.json -x exclude-patterns.txt | jq .
         if [ "$?" = "0" ]; then
             echo ""
             echo "Done. Scanned repository" $1
